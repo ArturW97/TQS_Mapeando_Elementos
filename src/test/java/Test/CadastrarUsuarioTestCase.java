@@ -1,9 +1,12 @@
 package Test;
 
 import Framework.BaseTest;
+import Framework.Report.Report;
+import Framework.Report.Screenshot;
 import Tasks.FormTask;
 import Tasks.HomeTask;
 import Tasks.MenuTask;
+import com.aventstack.extentreports.Status;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -17,8 +20,15 @@ public class CadastrarUsuarioTestCase extends BaseTest {
     @Test
     public void realizarCadastro(){
 
-        homeTask.acessaPageAutomacaoWeb();
-        menuTask.acessarFormulario();
-        formTask.preencherForm();
-    }
+        try{
+            Report.startReport("Realizar Cadastro de Usuário");
+            homeTask.acessaPageAutomacaoWeb();
+            menuTask.acessarFormulario();
+            formTask.preencherForm();
+        } catch (Exception e){
+            Report.extentTest.log(Status.FAIL, e.getMessage(), Screenshot.base64(driver));
+        }
+        }
+
+
 }

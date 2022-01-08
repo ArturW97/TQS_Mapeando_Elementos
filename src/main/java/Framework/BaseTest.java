@@ -2,6 +2,7 @@ package Framework;
 
 import Framework.Browser.DriverManager;
 import Framework.Browser.TypeDriver;
+import Framework.Report.Report;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
@@ -17,11 +18,13 @@ public class BaseTest extends DriverManager {
 
     @BeforeEach
     public void setUp(){
+        Report.setExtentReports();
         getDriver().get(url);
     }
 
     @AfterEach
     public void tearDown(){
+        Report.endReport();
         quitDriver();
     }
 
